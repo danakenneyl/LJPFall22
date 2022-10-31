@@ -2,9 +2,12 @@
 ## (Scripts for fine-tuning Hugging Face models on binary tasks)
 Disclaimer: it looks like Hugging Face may be changing how `load_metric` works soon, so this script may stop working soon. If that happens, please add it as an issue and I will try to fix it as soon as possible!
 
+## Install the packages
+You will need to install the packages found in `requirements.txt`
+
 ## Create your datasets
 First, put your datasets into the following format:
-The first column should be called "sentence1", and should be string values
+The first column should be called "sentence1", and should be string values.
 If you have a dataset of sentence pairs (e.g. [MRPC](https://paperswithcode.com/dataset/mrpc)), then your next column should be called "sentence2", and should contain string values.
 Your final column should be called "label", and should contain integer values.
 

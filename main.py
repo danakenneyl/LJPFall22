@@ -197,8 +197,8 @@ def main():
     # set these to your wandb project and entity
     # if you click on an empty project page, it should show you what these should be
     # it should look like wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY)
-    WANDB_PROJECT = "wandb_project"
-    WANDB_ENTITY = "wandb_entity"
+    WANDB_PROJECT = "test-project"
+    WANDB_ENTITY = "lawless"
 
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments))
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
@@ -287,8 +287,8 @@ def main():
         data_files = {"train": data_args.train_file, "validation": data_args.validation_file}
 
         # Get the test dataset: you can provide your own CSV/JSON test file (see below)
-        # when you use `do_predict` without specifying a GLUE benchmark task.
-        if training_args.do_predict:
+        # without specifying a GLUE benchmark task.
+        if training_args.do_predict or data_args.test_file is not None:
             if data_args.test_file is not None:
                 train_extension = data_args.train_file.split(".")[-1]
                 test_extension = data_args.test_file.split(".")[-1]
@@ -461,7 +461,14 @@ def main():
             eval_dataset = eval_dataset.select(range(max_eval_samples))
 
     if training_args.do_predict or data_args.task_name is not None or data_args.test_file is not None:
+        logger.info("Args (one is True):")
+        logger.info(training_args.do_predict)
+        logger.info(data_args.task_name is not None)
+        logger.info(data_args.test_file is not None)
         if "test" not in raw_datasets and "test_matched" not in raw_datasets:
+            logger.info("Here's raw datasets:")
+            logger.info(raw_datasets)
+            logger.info(raw_datasets.keys())
             raise ValueError("--do_predict requires a test dataset")
         predict_dataset = raw_datasets["test_matched" if data_args.task_name == "mnli" else "test"]
         if data_args.max_predict_samples is not None:
