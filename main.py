@@ -197,8 +197,8 @@ def main():
     # set these to your wandb project and entity
     # if you click on an empty project page, it should show you what these should be
     # it should look like wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY)
-    WANDB_PROJECT = "lawless"
-    WANDB_ENTITY = "kenny130"
+    WANDB_PROJECT = "test-project"
+    WANDB_ENTITY = "lawless"
 
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments))
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
