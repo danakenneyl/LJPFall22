@@ -3,3 +3,4 @@ wandb
 __pycache__
 run2
 .DS_Store
+pytorch_model.bin
